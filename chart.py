@@ -1,7 +1,6 @@
 import pandas as pd
 import collections
 import matplotlib.pyplot as plt
-from datetime import datetime
 
 excel_data = pd.read_excel('Ouvido.xlsx')
 data = pd.DataFrame(excel_data, columns=['Horário', 'Data'])
