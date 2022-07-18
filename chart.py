@@ -1,10 +1,34 @@
+import pandas as pd
+import collections
 import matplotlib.pyplot as plt
-   
-Year = [1920,1930,1940,1950,1960,1970,1980,1990,2000,2010]
-Unemployment_Rate = [9.8,12,8,7.2,6.9,7,6.5,6.2,5.5,6.3]
-  
-plt.plot(Year, Unemployment_Rate)
-plt.title('Unemployment Rate Vs Year')
-plt.xlabel('Year')
-plt.ylabel('Unemployment Rate')
+from datetime import datetime
+
+excel_data = pd.read_excel('Ouvido.xlsx')
+data = pd.DataFrame(excel_data, columns=['Horário', 'Data'])
+dados = collections.defaultdict(list)
+dias = []
+horarios = []
+
+for index, element in data.iterrows():
+    dados[element['Data']].append(element['Horário'].strftime('%H:%M'))
+    # if element['Data'] not in dias:
+        # dias.append(element['Data'])
+
+    # if element['Horário'] not in horarios:
+        # horarios.append(element['Horário'].strftime('%H:%M'))
+
+# for element in dados:
+#     print(dados[element])
+
+for element in dados:
+    horarios.append(len(dados[element]))
+
+for element in dados:
+    dias.append(element)
+
+plt.plot(dias, horarios, color='red', marker='o')
+plt.title('Quantidade por dia', fontsize=14)
+plt.xlabel('Data', fontsize=14)
+plt.ylabel('Quantidade', fontsize=14)
+plt.grid(True)
 plt.show()
